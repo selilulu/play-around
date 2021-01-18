@@ -22,13 +22,14 @@ When a guess was just one number from the secret number, show another message: "
 
  <form action="" method="POST">
  
- Make Your Guess:<input type ="number" name="input" placeholder="Enter a number" onkeyup="check(this)" value="0" data-max="6"  ></input>
- <!-- <input name="amount" value="0" data-max="3" onkeyup="check(this);"/> -->
+ Make Your Guess:<input type ="number" name="input" placeholder="Enter a number"  ></input>
 
  <input type="submit" name="submit" value="Enter" ></input>
 
  
  </form>
-
+ <!-- <p name='result' <?php echo $result ?> ></p> -->
+ <p type='number' name='secretno'></p>
+ <p name="tryOuts";></p>
  </body>
 </html>

@@ -5,21 +5,23 @@ class GuessingGame
     public $maxGuesses;
     public $secretNumber;
     public $inputNumber;
+    public $tryOuts=0;
+    public $submit;
+    
 
 
-    // TODO: set a default amount of max guesses
-    public function __construct(int $maxGuesses=6)
+    // TODO: set a default amount of max guesses DONE!
+    public function __construct($maxGuesses=4)
     {
         // We ask for the max guesses when someone creates a game
         // Allowing your settings to be chosen like this, will bring a lot of flexibility
-        // $this->maxGuesses = $maxGuesses.getAttribute("data-max");
-        // if(parseInt($maxGuesses.$value)>parseInt($max)){
-        //     alert("You've tried 6 times,could not guess the secret number yet.Restart the game");
-        // }
+        $this->maxGuesses = $maxGuesses;
         
-        
-        
-        
+    }
+    public function generateSecretNumber()
+    { 
+        return rand(1,10);
+
     }
 
     public function run()
@@ -32,34 +34,105 @@ class GuessingGame
         // TODO: check if the player has submitted a guess
         // --> if so, check if the player won (run the related function) or not (give a hint if the number was higher/lower or run playerLoses if all guesses are used).
         // TODO as an extra: if a reset button was clicked, use the reset function to set up a new game
+        
 
-       
+        if(isset($_POST['submit']))
+        {   if(empty($_SESSION['x'])){
+            $this->secretNumber=$this->generateSecretNumber();
+            $_SESSION['x']=$this->secretNumber;
+        }
+            var_dump($_SESSION['x']);
+            if(isset($_SESSION["tryOuts"]))
+            {
+               
+                $_SESSION["tryOuts"]++;
+
+            }
+
+            else
+            {
+
+                $_SESSION["tryOuts"] = $this->tryOuts;
+            }
+            // var_dump($this->tryOuts);
+
+            if($_SESSION["tryOuts"] >= $this->maxGuesses){
+                session_destroy();
+            }
+
+            $this->tryOuts = $_SESSION["tryOuts"];
+            // check the clicked checkbox
+            var_dump( $_SESSION["tryOuts"]);
+
+
+
+
+            if(!empty($_POST['input']))
+            {    
+                // CHECK T$this->tryOuts++;  
+
+
+                if ($_POST['input']==$this->secretNumber )
+                {
+                    
+                    echo $this->playerWins();
+                }
+                else
+                {
+                     echo $this->playerLoses();
+                }   
+            }
+
+        }
+
+    //   var_dump($this->inputNumber);
+    //    var_dump($this->secretNumber);
+      
+
+
     }
 
     public function playerWins()
     {
         // TODO: show a winner message (mention how many tries were needed)
-        if ($maxGuesses<=4 && $secretNumber== $inputNumber){
+         if ( $this->secretNumber== $this->inputNumber)
+        {
+             echo "You WON!Well done buddy";
 
         }
-
-
 
     }
 
     public function playerLoses()
     {
         // TODO: show a lost message (mention the secret number)
+        if($this->secretNumber!== $this->inputNumber )
+        {
+                echo "Ups,you lost..Secret number was {$this->secretNumber}.Try again.";
+        }
     }
+
+    public function higher()
+    {
+        if($this->secretNumber >  $this->inputNumber){
+            echo "The secret number was higher!";
+        }
+    }
+    public function lower()
+    {
+        if($this->secretNumber < $this->inputNumber){
+            echo "The secret number was lower!";
+        }
+    }
+
 
     public function reset()
     {
         // TODO: Generate a new secret number and overwrite the previous one
+        // $this->generateSecretNumber(22,27);
     }
 }
 $game = New GuessingGame;
-$game->maxGuesses;
 
 
-$secretNumber=rand(0,20);
-// echo rand(0,20);
+
