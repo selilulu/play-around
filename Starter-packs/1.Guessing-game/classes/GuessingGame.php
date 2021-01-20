@@ -68,18 +68,18 @@ class GuessingGame
 
 
             if(!empty($_POST['input']))
-            {    
+            {    $this->higher();
                 // CHECK T$this->tryOuts++;  
 
 
-                if ($_POST['input']==$this->secretNumber )
+                if ($_POST['input']==$_SESSION['x'] )
                 {
                     
-                    echo $this->playerWins();
+                    $this->playerWins();
                 }
                 else
                 {
-                     echo $this->playerLoses();
+                     $this->playerLoses();
                 }   
             }
 
@@ -95,35 +95,31 @@ class GuessingGame
     public function playerWins()
     {
         // TODO: show a winner message (mention how many tries were needed)
-         if ( $this->secretNumber== $this->inputNumber)
-        {
+        
              echo "You WON!Well done buddy";
 
-        }
+        
 
     }
 
     public function playerLoses()
     {
         // TODO: show a lost message (mention the secret number)
-        if($this->secretNumber!== $this->inputNumber )
+        if($_SESSION['x']!== $_POST["input"] )
         {
                 echo "Ups,you lost..Secret number was {$this->secretNumber}.Try again.";
         }
     }
 
     public function higher()
-    {
-        if($this->secretNumber >  $this->inputNumber){
+    {  
+        if($_SESSION["x"] >  $_POST["input"]){
             echo "The secret number was higher!";
         }
+        else echo "The secret number was lower!";
+            
     }
-    public function lower()
-    {
-        if($this->secretNumber < $this->inputNumber){
-            echo "The secret number was lower!";
-        }
-    }
+    
 
 
     public function reset()

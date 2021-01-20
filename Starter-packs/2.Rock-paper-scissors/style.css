@@ -1,0 +1,14 @@
+body{
+    /* background-image: url('background.jpg');
+    background-repeat: no-repeat, repeat; */
+    background-color: rgba(0, 0, 0, 0.322);
+}
+
+
+.checkbox,h1,.submit{
+    display:flex;
+    justify-content: center;
+}
+
+
+
