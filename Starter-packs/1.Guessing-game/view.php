@@ -28,8 +28,10 @@ When a guess was just one number from the secret number, show another message: "
 
  
  </form>
- <!-- <p name='result' <?php echo $result ?> ></p> -->
- <p type='number' name='secretno'></p>
- <p name="tryOuts";></p>
+
+ <p><?php if(!empty($game->result)){echo $game->result;} ?><p>
+
+
+ 
  </body>
 </html>
